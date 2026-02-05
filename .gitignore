@@ -1,3 +1,5 @@
 
 # Go debug file
 __debug*
+
+.vscode
