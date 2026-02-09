@@ -7,10 +7,6 @@ import (
 	"github.com/yrln/expense-tracker/internal/auth"
 	"github.com/yrln/expense-tracker/internal/config"
 	"github.com/yrln/expense-tracker/internal/database"
-	// "github.com/yrln/expenses-tracker/internal/config"
-	// _ "github.com/yrln/expenses-tracker/internal/database"
-	// _ "github.com/yrln/expenses-tracker/internal/expenses"
-	// _ "github.com/yrln/expenses-tracker/internal/middleware"
 )
 
 func main() {

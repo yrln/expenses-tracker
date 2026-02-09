@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func RegisterRoutes(fiber.Group, sql.DB) {
+func RegisterRoutes(r fiber.Router, db *sql.DB) {
 	//hello
 
 }
