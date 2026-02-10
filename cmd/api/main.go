@@ -17,6 +17,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer db.Close()
 
 	app := fiber.New()
 
@@ -24,9 +25,12 @@ func main() {
 		return c.JSON(fiber.Map{"status": "ok"})
 	})
 
-	// public auth routes
 	authGroup := app.Group("/auth")
 	auth.RegisterRoutes(authGroup, db)
+
+	/*api := app.Group("/api", middleware.JWTAuth())
+
+	expenses.RegisterRoutes(api, db)*/
 
 	log.Fatal(app.Listen(cfg.Addr))
 }
