@@ -17,7 +17,7 @@ func (r *Repository) Create(email, passwordHash string) (User, error) {
 	`, email, passwordHash)
 
 	if err != nil {
-		return User{}, nil
+		return User{}, err
 	}
 
 	id, err := res.LastInsertId()
