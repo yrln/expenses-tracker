@@ -7,6 +7,8 @@ import (
 	"github.com/yrln/expense-tracker/internal/auth"
 	"github.com/yrln/expense-tracker/internal/config"
 	"github.com/yrln/expense-tracker/internal/database"
+	"github.com/yrln/expense-tracker/internal/expenses"
+	"github.com/yrln/expense-tracker/internal/middleware"
 )
 
 func main() {
@@ -28,9 +30,9 @@ func main() {
 	authGroup := app.Group("/auth")
 	auth.RegisterRoutes(authGroup, db)
 
-	/*api := app.Group("/api", middleware.JWTAuth())
+	api := app.Group("/api", middleware.JWTAuth())
 
-	expenses.RegisterRoutes(api, db)*/
+	expenses.RegisterRoutes(api, db)
 
 	log.Fatal(app.Listen(cfg.Addr))
 }
