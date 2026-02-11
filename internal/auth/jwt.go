@@ -13,6 +13,10 @@ type Claims struct {
 	jwt.RegisteredClaims
 }
 
+func JwtSecret() []byte {
+	return jwtSecret
+}
+
 func GenerateToken(userID uint64) (string, error) {
 	claims := Claims{
 		UserID: userID,
