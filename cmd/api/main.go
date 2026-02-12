@@ -31,7 +31,7 @@ func main() {
 	auth.RegisterRoutes(authGroup, db)
 
 	api := app.Group("/api", middleware.JWTAuth())
-
+	auth.RegisterUserRoutes(api, db)
 	expenses.RegisterRoutes(api, db)
 
 	log.Fatal(app.Listen(cfg.Addr))

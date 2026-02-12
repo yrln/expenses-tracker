@@ -53,3 +53,18 @@ func (r *Repository) GetByEmail(email string) (User, error) {
 
 	return u, nil
 }
+
+func (r *Repository) GetByID(id uint64) (User, error) {
+	var u User
+	err := r.db.QueryRow(`
+		SELECT id, email, password_hash, created_at
+		FROM users
+		WHERE id =?
+	`, id).Scan(&u.ID, &u.Email, &u.PasswordHash, &u.CreatedAt)
+
+	if err != nil {
+		return User{}, err
+	}
+
+	return u, nil
+}

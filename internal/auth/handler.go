@@ -3,6 +3,7 @@ package auth
 import (
 	"database/sql"
 	"errors"
+	"strconv"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"
@@ -21,6 +22,60 @@ func RegisterRoutes(r fiber.Router, db *sql.DB) {
 
 	r.Post("/register", h.register)
 	r.Post("/login", h.login)
+}
+
+func RegisterUserRoutes(r fiber.Router, db *sql.DB) {
+	h := Handler{
+		users: users.NewRepository(db),
+	}
+
+	r.Get("/me", h.me)
+}
+
+func (h *Handler) me(c *fiber.Ctx) error {
+	userIDVal := c.Locals("user_id")
+	if userIDVal == nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "unauthorized",
+		})
+	}
+
+	var userID uint64
+	switch v := userIDVal.(type) {
+	case uint64:
+		userID = v
+	case int64:
+		userID = uint64(v)
+	case int:
+		userID = uint64(v)
+	case string:
+		if parsed, err := strconv.ParseUint(v, 10, 64); err == nil {
+			userID = parsed
+		}
+	}
+	if userID == 0 {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "invalid user id in context",
+		})
+	}
+
+	u, err := h.users.GetByID(userID)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+				"error": "user not found",
+			})
+		}
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "failed to fetch user",
+		})
+	}
+
+	return c.JSON(fiber.Map{
+		"id":         u.ID,
+		"email":      u.Email,
+		"created_at": u.CreatedAt,
+	})
 }
 
 type registerRequest struct {
