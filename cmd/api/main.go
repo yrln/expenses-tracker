@@ -46,7 +46,7 @@ func main() {
 	authGroup := app.Group("/auth")
 	auth.RegisterRoutes(authGroup, db)
 
-	api := app.Group("/api", middleware.JWTAuth())
+	api := app.Group("/api/v1", middleware.JWTAuth())
 	auth.RegisterUserRoutes(api, db)
 	expenses.RegisterRoutes(api, db)
 
