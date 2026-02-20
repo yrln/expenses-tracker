@@ -23,6 +23,22 @@ func main() {
 
 	app := fiber.New()
 
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.JSON(fiber.Map{
+			"name":    "expenses-tracker",
+			"status":  "running",
+			"version": "1.0.0",
+		})
+	})
+
+	app.Get("/about", func(c *fiber.Ctx) error {
+		return c.JSON(fiber.Map{
+			"service":    "expenses-tracker",
+			"maintainer": "Yordan Flitz",
+			"contact":    "doctermath@gmail.com",
+		})
+	})
+
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{"status": "ok"})
 	})
