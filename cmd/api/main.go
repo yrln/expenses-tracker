@@ -40,7 +40,7 @@ func main() {
 	})
 
 	app.Get("/health", func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{"status": "ok"})
+		return c.SendStatus(fiber.StatusOK)
 	})
 
 	authGroup := app.Group("/auth")
