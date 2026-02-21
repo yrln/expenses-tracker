@@ -15,7 +15,7 @@ jobs:
 
       - name: Build Linux binary
         run: |
-          GOOS=linux GOARCH=amd64 go build -o app
+          GOOS=linux GOARCH=amd64 go build -o app ./cmd/api
 
       - name: Copy binary to EC2
         uses: appleboy/scp-action@v0.1.7
