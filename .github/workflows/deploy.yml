@@ -24,7 +24,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "app"
-          target: "/home/ubuntu/expense-tracker/cmd/api/"
+          target: "/home/ubuntu/expenses-tracker/cmd/api/"
 
       - name: Restart service
         uses: appleboy/ssh-action@v1.0.3
