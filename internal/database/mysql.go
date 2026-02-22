@@ -27,7 +27,6 @@ func OpenMySQL(dsn string) (*sql.DB, error) {
 	if err != nil {
 		log.Fatalf("Failed to connect: %v", err)
 	}
-	defer db.Close()
 
 	if err := db.Ping(); err != nil {
 		log.Fatalf("Failed to ping: %v", err)
@@ -38,6 +37,6 @@ func OpenMySQL(dsn string) (*sql.DB, error) {
 		log.Fatalf("Query failed: %v", err)
 	}
 	fmt.Println(v)
-	return db, nil
 
+	return db, nil
 }
