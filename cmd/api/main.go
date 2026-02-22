@@ -15,7 +15,7 @@ func main() {
 	// load config
 	cfg := config.Load()
 
-	db, err := database.OpenMySQL(cfg.DBDSN)
+	db, err := database.OpenMySQL(cfg.DBDSN, cfg.DBCERT)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -26,6 +26,7 @@ func main() {
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
 			"name":    "expenses-tracker",
+			"env":     cfg.Env,
 			"status":  "running",
 			"version": "1.0.0",
 		})
