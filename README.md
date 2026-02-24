@@ -91,3 +91,11 @@ Use header `Authorization: Bearer <token>` for access protected resources.
 This is a learning project to practice Go backend development, REST API design, and working with relational databases.
 
 The structure loosely follows common Go REST API layouts (separate config, database, and domain packages).
+
+# To Be Added Soon
+- Swagger API Documentation
+- Redis integration
+- Containerize App in Docker
+- Add Test Function
+- Improve CI with test
+- Rate Limiting
